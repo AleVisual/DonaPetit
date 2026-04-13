@@ -265,3 +265,46 @@
     font-size: var(--font-size-3xl);
   }
 }
+
+/* ==============================================
+   OPTIMIZACIONES MOBILE (pointer: coarse)
+   Mejora scroll, FPS y consumo de batería
+   ============================================== */
+@media (pointer: coarse) {
+
+  /* Reducir blur costoso en GPU mobile */
+  .nav-links {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .btn-hero {
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+
+  /* Desactivar hover transforms en touch (no aplican igual) */
+  .btn:hover {
+    transform: none;
+  }
+  .producto-card:hover {
+    transform: none;
+  }
+  .galeria-item:hover {
+    transform: none;
+  }
+
+  /* Asegurar scroll táctil vertical en contenedores */
+  .galeria-grid,
+  .productos-grid,
+  .video-grid {
+    touch-action: pan-y;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Hero: fondo estático cuando video está pausado */
+  .hero-media {
+    background-image: url('../Presentación/dona2.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+}
