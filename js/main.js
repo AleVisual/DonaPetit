@@ -41,8 +41,8 @@ function initLenis() {
   }
 
   lenis = new Lenis({
-    lerp: 0.12,
-    wheelMultiplier: 1.4,
+    lerp: 0.10,           // Respuesta directa sin rebote
+    wheelMultiplier: 1.0, // Velocidad 1:1 con la rueda (sin exageración)
     smoothWheel: true,
     smoothTouch: false,
   });
@@ -52,6 +52,9 @@ function initLenis() {
     gsap.ticker.add((time) => {
       lenis.raf(time * 1000);
     });
+    // CRÍTICO: evita que GSAP saltee frames cuando el browser va lento,
+    // que es lo que causa que Lenis "no sepa para donde ir"
+    gsap.ticker.lagSmoothing(0);
   } else {
     // Fallback con requestAnimationFrame si GSAP no está
     function rafLoop(time) {
@@ -290,6 +293,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initLazyFallback();
   initBackToTop();
   initMobileVideoOptimize();
+  initVideoVisibility();
 
   // Marcar el body como listo (por si algún CSS lo usa)
   document.body.classList.add('js-ready');
@@ -301,7 +305,8 @@ document.addEventListener('DOMContentLoaded', () => {
    reducir consumo de CPU/batería y mejorar el scroll.
    ───────────────────────────────────────────────── */
 function initMobileVideoOptimize() {
-  if (!isTouchDevice()) return;
+  // PRUEBA: comentado para testear video en mobile — descomentar para deshabilitar
+  // if (!isTouchDevice()) return;
 
   // Seleccionar videos de fondo (hero y proceso) — NO el modal
   const bgVideos = document.querySelectorAll('.hero-video, .proceso-video');
@@ -314,6 +319,57 @@ function initMobileVideoOptimize() {
     video.setAttribute('preload', 'none');
     // Mostrar poster como imagen estática
     video.load();
+  });
+}
+
+/* ─────────────────────────────────────────────────
+   8. REPRODUCCIÓN INTELIGENTE DE VIDEOS (desktop)
+   Los videos de fondo se pausan automáticamente
+   cuando su sección sale del viewport y se reanudan
+   cuando vuelven a ser visibles.
+   Así el CPU descansa mientras se scrollea por el
+   resto de las secciones.
+   ───────────────────────────────────────────────── */
+function initVideoVisibility() {
+  // Solo en desktop (en mobile ya están todos pausados)
+  if (isTouchDevice()) return;
+
+  // Pares: sección → video que contiene
+  const videoSections = [
+    { section: document.querySelector('.hero'),    video: document.querySelector('.hero-video')    },
+    { section: document.querySelector('.proceso'), video: document.querySelector('.proceso-video') },
+  ];
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        const video = entry.target._video;
+        if (!video) return;
+
+        if (entry.isIntersecting) {
+          // La sección es visible → reproducir
+          if (video.paused) {
+            video.play().catch(() => {}); // catch por si el browser lo bloquea
+          }
+        } else {
+          // La sección salió del viewport → pausar
+          if (!video.paused) {
+            video.pause();
+          }
+        }
+      });
+    },
+    {
+      // Se activa cuando al menos el 10% de la sección es visible
+      threshold: 0.1,
+    }
+  );
+
+  videoSections.forEach(({ section, video }) => {
+    if (!section || !video) return;
+    // Guardamos referencia al video en el elemento de la sección
+    section._video = video;
+    observer.observe(section);
   });
 }
 
