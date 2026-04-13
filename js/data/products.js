@@ -185,7 +185,7 @@ const PRODUCTS = {
       name: 'Copa Mundial',
       desc: 'Réplica de la Copa del Mundo en chocolate. Para los amantes del fútbol.',
       img: 'ProductoChocolates/CopaMundo2.jpg',
-      badge: '✨Destacado',
+      badge: '✨ Destacado',
     },
     {
       id: 'choco-11',
