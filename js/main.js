@@ -305,21 +305,18 @@ document.addEventListener('DOMContentLoaded', () => {
    reducir consumo de CPU/batería y mejorar el scroll.
    ───────────────────────────────────────────────── */
 function initMobileVideoOptimize() {
-  // PRUEBA: comentado para testear video en mobile — descomentar para deshabilitar
-  // if (!isTouchDevice()) return;
-
-  // Seleccionar videos de fondo (hero y proceso) — NO el modal
+  // ⏸ PRUEBA: función desactivada temporalmente para testear video en mobile
+  // Para restaurar: descomentar todo el bloque de abajo
+  /*
+  if (!isTouchDevice()) return;
   const bgVideos = document.querySelectorAll('.hero-video, .proceso-video');
-
   bgVideos.forEach(video => {
-    // Quitar autoplay y pausar
     video.removeAttribute('autoplay');
     video.pause();
-    // Evitar que cargue datos innecesarios
     video.setAttribute('preload', 'none');
-    // Mostrar poster como imagen estática
     video.load();
   });
+  */
 }
 
 /* ─────────────────────────────────────────────────
@@ -419,3 +416,4 @@ console.log(
   "%cSi intentas robar nuestras fotos, una dona se pondrá triste... ¡Cerrá esta ventana y mejor pedite unas donas de verdad! 😉",
   "color: #7A5C4A; font-size: 14px; font-weight: 500; font-family: sans-serif;"
 );
+
