@@ -13,8 +13,10 @@
 /* Previene overflow horizontal indeseado */
 html {
   overflow-x: hidden;
-  /* Scroll suave nativo como fallback (Lenis lo sobreescribe) */
+  /* Scroll suave nativo como fallback (Lenis lo sobreescribe en desktop) */
   scroll-behavior: smooth;
+  /* Habilita scroll táctil nativo en toda la página */
+  touch-action: pan-y;
 }
 
 body {
@@ -24,8 +26,10 @@ body {
   color: var(--color-text);
   background-color: var(--color-cream);
   overflow-x: hidden;
-  /* Soporte para Lenis smooth scroll */
-  overscroll-behavior: none;
+  /* overscroll-behavior solo en desktop (Lenis no corre en mobile) */
+  overscroll-behavior-x: none;
+  /* Garantiza scroll táctil vertical fluido */
+  -webkit-overflow-scrolling: touch;
 }
 
 /* --- Imágenes responsivas --- */
