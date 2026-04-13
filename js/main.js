@@ -13,11 +13,27 @@
  */
 
 /* ─────────────────────────────────────────────────
-   1. LENIS — Scroll suave
+   DETECCIÓN DE DISPOSITIVO
+   ───────────────────────────────────────────────── */
+const isTouchDevice = () =>
+  window.matchMedia('(pointer: coarse)').matches ||
+  ('ontouchstart' in window) ||
+  navigator.maxTouchPoints > 0;
+
+/* ─────────────────────────────────────────────────
+   1. LENIS — Scroll suave (solo desktop)
+   En mobile/touch Lenis interfiere con el scroll
+   táctil nativo aunque 'smoothTouch' esté en false.
    ───────────────────────────────────────────────── */
 let lenis = null;
 
 function initLenis() {
+  // No iniciar Lenis en dispositivos táctiles
+  if (isTouchDevice()) {
+    console.info('DonaPetit: Dispositivo táctil detectado — usando scroll nativo.');
+    return;
+  }
+
   // Verificar que Lenis esté disponible (CDN cargado)
   if (typeof Lenis === 'undefined') {
     console.warn('DonaPetit: Lenis no cargado, usando scroll nativo.');
@@ -25,8 +41,8 @@ function initLenis() {
   }
 
   lenis = new Lenis({
-    lerp: 0.15,                // Un poco más rápido (reacción más inmediata)
-    wheelMultiplier: 1.8,      // Mucho más recorrido por cada giro de rueda
+    lerp: 0.12,
+    wheelMultiplier: 1.4,
     smoothWheel: true,
     smoothTouch: false,
   });
@@ -273,10 +289,33 @@ document.addEventListener('DOMContentLoaded', () => {
   initSmoothLinks();
   initLazyFallback();
   initBackToTop();
+  initMobileVideoOptimize();
 
   // Marcar el body como listo (por si algún CSS lo usa)
   document.body.classList.add('js-ready');
 });
+
+/* ─────────────────────────────────────────────────
+   7. OPTIMIZACIÓN DE VIDEOS EN MOBILE
+   En mobile se pausan los videos de fondo para
+   reducir consumo de CPU/batería y mejorar el scroll.
+   ───────────────────────────────────────────────── */
+function initMobileVideoOptimize() {
+  if (!isTouchDevice()) return;
+
+  // Seleccionar videos de fondo (hero y proceso) — NO el modal
+  const bgVideos = document.querySelectorAll('.hero-video, .proceso-video');
+
+  bgVideos.forEach(video => {
+    // Quitar autoplay y pausar
+    video.removeAttribute('autoplay');
+    video.pause();
+    // Evitar que cargue datos innecesarios
+    video.setAttribute('preload', 'none');
+    // Mostrar poster como imagen estática
+    video.load();
+  });
+}
 
 /* ==============================================
    PROTECCIÓN BÁSICA DE CONTENIDO
