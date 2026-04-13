@@ -305,18 +305,18 @@ document.addEventListener('DOMContentLoaded', () => {
    reducir consumo de CPU/batería y mejorar el scroll.
    ───────────────────────────────────────────────── */
 function initMobileVideoOptimize() {
-  // ⏸ PRUEBA: función desactivada temporalmente para testear video en mobile
-  // Para restaurar: descomentar todo el bloque de abajo
-  /*
   if (!isTouchDevice()) return;
+
+  // En mobile el browser puede ignorar el atributo autoplay cuando
+  // hay mucho JS cargando. Forzamos play() explícitamente.
   const bgVideos = document.querySelectorAll('.hero-video, .proceso-video');
   bgVideos.forEach(video => {
-    video.removeAttribute('autoplay');
-    video.pause();
-    video.setAttribute('preload', 'none');
-    video.load();
+    video.muted = true;       // asegurar silencio (requisito del browser)
+    video.playsInline = true; // asegurar inline en iOS
+    video.play().catch(() => {
+      // Si el browser igual lo bloquea, no rompemos nada
+    });
   });
-  */
 }
 
 /* ─────────────────────────────────────────────────
