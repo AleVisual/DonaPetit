@@ -1,0 +1,994 @@
+/* ==============================================
+   COMPONENTS CSS — Estilos de componentes
+   reutilizables: Navbar, Cards, Tabs, Carousel,
+   Lightbox, Formulario, Stats, etc.
+   ============================================== */
+
+/* ==============================================
+   NAVBAR
+   ============================================== */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-nav);
+  height: var(--navbar-height);
+  display: flex;
+  align-items: center;
+  /* Inicio: transparente sobre el hero */
+  background: transparent;
+  transition:
+    background var(--transition-slow),
+    box-shadow var(--transition-slow),
+    backdrop-filter var(--transition-slow);
+  will-change: background, backdrop-filter;
+  /* Aceleración GPU */
+}
+
+/* Estado scrolled — fondo sólido */
+.navbar.scrolled {
+  background: rgba(253, 246, 238, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: var(--shadow-md);
+}
+
+.nav-container {
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: var(--space-8);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+
+/* Crédito del desarrollador en el footer-bottom */
+.footer-dev {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-dev-logo {
+  height: 28px;
+  width: 28px;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+  opacity: 0.85;
+}
+
+.footer-dev-text {
+  font-size: var(--font-size-xs);
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.04em;
+}
+
+.footer-dev-text strong {
+  color: rgba(255, 255, 255, 0.65);
+  font-weight: 600;
+}
+
+.nav-logo-img {
+  /*Para agrandar la imagen del logo del header */
+  height: 100px; /* Tamaño imponente */
+  width: auto;
+  position: relative;
+  top: -10px; /* La subimos para que desborde equilibradamente arriba y abajo */
+  z-index: 10;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.15));
+  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), filter var(--transition-base);
+  
+  /* Inicialmente oculta */
+  opacity: 0;
+  transform: scale(0.8);
+  pointer-events: none;
+}
+
+.nav-logo-img:hover {
+  transform: scale(1.1) rotate(3deg);
+  filter: drop-shadow(0 8px 20px rgba(0,0,0,0.2));
+}
+
+.navbar.scrolled .nav-logo-img {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: all;
+}
+
+/* Burbuja / Nube de comentario (para Mi Emprendimiento) */
+.nav-logo {
+  position: relative;
+}
+
+.nav-logo-bubble {
+  position: absolute;
+  top: calc(100% + 30px); /* Más espacio para el logo grande */
+  left: 0;
+  background: var(--color-white);
+  color: var(--color-chocolate);
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-xl);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  line-height: 1.4;
+  width: 200px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--color-berry-light);
+
+  /* Inicialmente oculta */
+  opacity: 0;
+  transform: translateY(10px) scale(0.9);
+  pointer-events: none;
+  transition:
+    opacity 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: var(--z-above);
+}
+
+/* Triángulo de la nube */
+.nav-logo-bubble::after {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 20px;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 9px solid var(--color-white);
+}
+
+.nav-logo-bubble.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: all;
+}
+
+.nav-logo-text {
+  display: block;
+  font-style: italic;
+}
+
+/* Links de navegación */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.nav-link {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.9);
+  transition: color var(--transition-base);
+  position: relative;
+}
+
+.navbar.scrolled .nav-link {
+  color: var(--color-text);
+}
+
+/* Underline animado en hover */
+.nav-link:not(.nav-cta)::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-primary);
+  border-radius: var(--radius-full);
+  transition: width var(--transition-base);
+}
+
+.nav-link:not(.nav-cta):hover::after {
+  width: 100%;
+}
+
+.nav-link:not(.nav-cta):hover {
+  color: var(--color-primary);
+}
+
+/* CTA de navbar */
+.nav-cta {
+  background: var(--color-primary);
+  color: var(--color-white) !important;
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  transition:
+    background var(--transition-base),
+    transform var(--transition-base),
+    box-shadow var(--transition-base);
+}
+
+.nav-cta:hover {
+  background: var(--color-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Hamburguesa mobile */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: var(--space-2);
+  cursor: pointer;
+}
+
+.nav-hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--color-white);
+  border-radius: var(--radius-full);
+  transition: transform var(--transition-base), opacity var(--transition-base);
+}
+
+.navbar.scrolled .nav-hamburger span {
+  background: var(--color-text);
+}
+
+/* Estado abierto del hamburguesa */
+.nav-hamburger.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-hamburger.open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.nav-hamburger.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ==============================================
+   CARDS DE PRODUCTO
+   ============================================== */
+.producto-card {
+  background: var(--color-white);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform var(--transition-base),
+    box-shadow var(--transition-base);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.producto-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-xl);
+}
+
+/* Contenedor de imagen del producto */
+.producto-card-img-wrap {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  background: var(--color-cream-dark);
+}
+
+.producto-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.producto-card:hover .producto-card-img {
+  transform: scale(1.08);
+}
+
+/* Badge flotante */
+.producto-badge {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  background: var(--color-accent);
+  color: var(--color-white);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-sm);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+/* Contenido de la card */
+.producto-card-body {
+  padding: var(--space-5) var(--space-6);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.producto-card-name {
+  font-family: var(--font-display);
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-chocolate);
+  line-height: 1.2;
+}
+
+.producto-card-desc {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.producto-card-footer {
+  margin-top: var(--space-4);
+}
+
+/* ==============================================
+   TABS DE PRODUCTOS
+   ============================================== */
+.productos-tabs {
+  display: flex;
+  gap: var(--space-3);
+  justify-content: center;
+  margin-bottom: var(--space-10);
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  padding: var(--space-3) var(--space-8);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-base);
+  font-weight: 700;
+  color: var(--color-text-muted);
+  background: var(--color-cream-dark);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition:
+    background var(--transition-base),
+    color var(--transition-base),
+    border-color var(--transition-base),
+    transform var(--transition-spring),
+    box-shadow var(--transition-base);
+}
+
+.tab-btn:hover {
+  background: var(--color-cream);
+  color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.tab-btn.active {
+  background: var(--color-primary);
+  color: var(--color-white);
+  border-color: var(--color-primary);
+  box-shadow: 0 4px 16px rgba(194, 24, 91, 0.35);
+  transform: translateY(-2px);
+}
+
+/* Grid de productos */
+.productos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-8);
+  /* Estado hidden — oculto */
+}
+
+.productos-grid[hidden] {
+  display: none;
+}
+
+/* Animación de entrada del panel */
+.productos-grid.panel-entering {
+  animation: panelFadeIn 0.4s ease forwards;
+}
+
+@keyframes panelFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==============================================
+   GALERÍA — MASONRY
+   ============================================== */
+.galeria-filters {
+  display: flex;
+  gap: var(--space-3);
+  justify-content: center;
+  margin-bottom: var(--space-10);
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: var(--space-2) var(--space-6);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  background: var(--color-cream-dark);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition:
+    background var(--transition-base),
+    color var(--transition-base),
+    border-color var(--transition-base);
+}
+
+.filter-btn:hover {
+  color: var(--color-primary);
+  background: var(--color-cream);
+}
+
+.filter-btn.active {
+  background: var(--color-chocolate);
+  color: var(--color-white);
+  border-color: var(--color-chocolate);
+}
+
+/* Grid masonry usando columns */
+.galeria-grid {
+  columns: 4 200px;
+  column-gap: var(--space-4);
+}
+
+.galeria-item {
+  break-inside: avoid;
+  margin-bottom: var(--space-4);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  /* Animación de filtrado */
+  transition: opacity var(--transition-base), transform var(--transition-base);
+}
+
+.galeria-item.hidden,
+.galeria-item.filtered-out {
+  display: none;
+}
+
+.galeria-item-img {
+  width: 100%;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Overlay con nombre del producto */
+.galeria-item-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(78, 43, 30, 0.85) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+  display: flex;
+  align-items: flex-end;
+  padding: var(--space-4);
+}
+
+.galeria-item:hover .galeria-item-overlay {
+  opacity: 1;
+}
+
+.galeria-item:hover .galeria-item-img {
+  transform: scale(1.06);
+}
+
+.galeria-item-name {
+  color: var(--color-white);
+  font-family: var(--font-display);
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* ==============================================
+   LIGHTBOX
+   ============================================== */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-lightbox);
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  /* Animación de apertura */
+  animation: lightboxOpen 0.3s ease;
+}
+
+@keyframes lightboxOpen {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.lightbox[hidden] {
+  display: none;
+}
+
+.lightbox-content {
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.lightbox-img {
+  max-width: 90vw;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-xl);
+}
+
+.lightbox-caption {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: var(--font-size-sm);
+  text-align: center;
+}
+
+/* Botones del lightbox */
+.lightbox-close,
+.lightbox-prev,
+.lightbox-next {
+  position: absolute;
+  color: var(--color-white);
+  font-size: var(--font-size-2xl);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-full);
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background var(--transition-base), transform var(--transition-base);
+  backdrop-filter: blur(4px);
+}
+
+.lightbox-close:hover,
+.lightbox-prev:hover,
+.lightbox-next:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+.lightbox-close {
+  top: var(--space-6);
+  right: var(--space-6);
+}
+
+.lightbox-prev {
+  left: var(--space-4);
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: var(--font-size-3xl);
+}
+
+.lightbox-prev:hover {
+  transform: translateY(-50%) scale(1.1);
+}
+
+.lightbox-next {
+  right: var(--space-4);
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: var(--font-size-3xl);
+}
+
+.lightbox-next:hover {
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* ==============================================
+   CAROUSEL DE TESTIMONIOS
+   ============================================== */
+.carousel-wrapper {
+  position: relative;
+  overflow: hidden;
+  padding-bottom: var(--space-12);
+}
+
+.carousel-track {
+  display: flex;
+  gap: var(--space-8);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+  user-select: none;
+}
+
+/* Card de testimonio */
+.testimonio-card {
+  min-width: 420px;
+  background: var(--color-white);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-8) var(--space-8);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  flex-shrink: 0;
+  position: relative;
+}
+
+/* Comilla decorativa */
+.testimonio-card::before {
+  content: '"';
+  position: absolute;
+  top: var(--space-4);
+  left: var(--space-6);
+  font-family: var(--font-display);
+  font-size: 6rem;
+  line-height: 1;
+  color: var(--color-primary);
+  opacity: 0.12;
+  pointer-events: none;
+}
+
+.testimonio-stars {
+  display: flex;
+  gap: 3px;
+  color: var(--color-accent);
+  font-size: var(--font-size-md);
+}
+
+.testimonio-text {
+  font-size: var(--font-size-md);
+  color: var(--color-text);
+  line-height: 1.7;
+  font-style: italic;
+}
+
+.testimonio-author {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  border-top: 1px solid var(--color-cream-dark);
+  padding-top: var(--space-4);
+}
+
+.testimonio-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+  border: 3px solid var(--color-primary);
+  background: var(--color-cream-dark);
+  flex-shrink: 0;
+  /* Avatar placeholder como emoji */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.testimonio-name {
+  font-weight: 700;
+  color: var(--color-chocolate);
+  font-size: var(--font-size-base);
+}
+
+.testimonio-location {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+/* Controles del carrusel */
+.carousel-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-6);
+  margin-top: var(--space-8);
+}
+
+.carousel-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  background: var(--color-white);
+  color: var(--color-chocolate);
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+  transition: background var(--transition-base), transform var(--transition-base);
+  border: 1px solid var(--color-cream-dark);
+}
+
+.carousel-btn:hover {
+  background: var(--color-primary);
+  color: var(--color-white);
+  transform: scale(1.1);
+}
+
+/* Dots del carrusel */
+.carousel-dots {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.carousel-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-full);
+  background: var(--color-cream-dark);
+  border: 2px solid var(--color-text-muted);
+  cursor: pointer;
+  transition: background var(--transition-base), transform var(--transition-base);
+}
+
+.carousel-dot.active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  transform: scale(1.3);
+}
+
+/* ==============================================
+   ESTADÍSTICAS ANIMADAS
+   ============================================== */
+.historia-stats {
+  display: flex;
+  gap: var(--space-8);
+  margin-top: var(--space-8);
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-1);
+}
+
+.stat-number {
+  font-family: var(--font-display);
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--color-primary);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+/* ==============================================
+   FORMULARIO
+   ============================================== */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.form-label {
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: 0.02em;
+}
+
+.form-input {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-cream-dark);
+  border-radius: var(--radius-lg);
+  background: var(--color-cream);
+  color: var(--color-text);
+  font-size: var(--font-size-base);
+  transition:
+    border-color var(--transition-base),
+    box-shadow var(--transition-base),
+    background var(--transition-base);
+  outline: none;
+}
+
+.form-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(194, 24, 91, 0.12);
+  background: var(--color-white);
+}
+
+.form-input::placeholder {
+  color: var(--color-text-muted);
+  opacity: 0.6;
+}
+
+.form-select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%237A5C4A' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--space-4) center;
+  padding-right: var(--space-10);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* ==============================================
+   SOCIAL ICONS DEL FOOTER
+   ============================================== */
+.social-icons {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.social-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-white);
+  transition: transform var(--transition-spring), box-shadow var(--transition-base);
+}
+
+.social-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.social-icon:hover {
+  transform: translateY(-4px) scale(1.1);
+  box-shadow: var(--shadow-lg);
+}
+
+.social-whatsapp {
+  background: #25D366;
+}
+
+.social-instagram {
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+}
+
+/* ==============================================
+   SCROLL INDICATOR DEL HERO
+   ============================================== */
+.hero-scroll-indicator {
+  position: absolute;
+  bottom: var(--space-8);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.scroll-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.8);
+  animation: scrollBounce 1.8s ease-in-out infinite;
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
+}
+
+@keyframes scrollBounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  50% {
+    transform: translateY(10px);
+    opacity: 0.5;
+  }
+}
+
+/* ==============================================
+   BOTÓN VOLVER ARRIBA (Back to Top)
+   Generado dinámicamente por main.js
+   ============================================== */
+.back-to-top {
+  position: fixed;
+  bottom: var(--space-8);
+  right: var(--space-8);
+  z-index: var(--z-overlay);
+  width: 54px;
+  height: 54px;
+  border-radius: var(--radius-full);
+  background: var(--color-chocolate);
+  color: var(--color-white);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  /* Inicialmente oculto */
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+    background 0.3s ease;
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+}
+
+.back-to-top:hover {
+  background: var(--color-primary);
+  transform: translateY(-5px) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+}
+
+.back-to-top svg {
+  transition: transform 0.3s ease;
+}
+
+.back-to-top:hover svg {
+  transform: translateY(-2px);
+}
+
+/* ==============================================
+   NAV LINK — Estado active
+   ============================================== */
+.nav-link.active:not(.nav-cta) {
+  color: var(--color-primary) !important;
+}
+
+.navbar:not(.scrolled) .nav-link.active:not(.nav-cta) {
+  color: var(--color-white) !important;
+}
+
+.nav-link.active:not(.nav-cta)::after {
+  width: 100%;
+}
+
+/* ==============================================
+   FORM GROUP — Estado focused (visual extra)
+   ============================================== */
+.form-group.focused .form-label {
+  color: var(--color-primary);
+  transition: color var(--transition-base);
+}

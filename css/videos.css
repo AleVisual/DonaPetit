@@ -1,0 +1,168 @@
+/* ==============================================
+   VIDEOS CSS — Estilos para el modal de videos.
+   Separado para no sobrecargar el CSS principal.
+   ============================================== */
+
+.video-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  overflow-y: auto; /* Permite scroll en toda la pantalla del modal */
+  padding: var(--space-8) var(--space-4);
+  display: flex; /* Lo usamos para centrar horizontalmente */
+  justify-content: center;
+}
+
+.video-modal.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.video-modal-overlay {
+  position: fixed; /* Fixed para que cubra todo siempre */
+  inset: 0;
+  background: rgba(45, 23, 16, 0.9); /* Chocolate más sólido para contraste */
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  z-index: -1;
+}
+
+.video-modal-content {
+  position: relative;
+  width: 94%;
+  max-width: 1400px;
+  background: var(--color-white);
+  border-radius: var(--radius-3xl);
+  padding: var(--space-8);
+  box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+  margin: 40px auto; 
+  transform: translateY(30px);
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.video-modal.open .video-modal-content {
+  transform: translateY(0) scale(1);
+}
+
+/* Header del modal */
+.video-modal-header {
+  text-align: center;
+  margin-bottom: var(--space-10);
+}
+
+.video-modal-title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-3xl);
+  color: var(--color-chocolate);
+  margin-bottom: var(--space-2);
+}
+
+.video-modal-subtitle {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-md);
+}
+
+/* Grid de videos: flexible */
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--space-8);
+}
+
+.video-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  background: var(--color-cream);
+  padding: var(--space-4);
+  border-radius: var(--radius-2xl);
+  transition: transform 0.3s ease;
+}
+
+.video-card:hover {
+  transform: translateY(-5px);
+  background: var(--color-cream-dark);
+}
+
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  height: 400px; /* Altura fija para controlar el espacio vertical */
+  background: #000;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.video-wrapper video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Para que se vea TODO el video */
+}
+
+.video-caption {
+  font-weight: 700;
+  color: var(--color-chocolate);
+  text-align: center;
+  font-size: 1.25rem;
+  letter-spacing: 0.05em;
+  margin-top: var(--space-3);
+  text-transform: uppercase;
+}
+
+/* Botón cerrar */
+.video-modal-close {
+  position: absolute;
+  top: var(--space-6);
+  right: var(--space-6);
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  background: var(--color-cream-dark);
+  border: none;
+  font-size: 24px;
+  color: var(--color-chocolate);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.video-modal-close:hover {
+  background: var(--color-primary);
+  color: var(--color-white);
+  transform: rotate(90deg);
+}
+
+/* Scrollbar personalizado pal modal */
+.video-modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+.video-modal-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+.video-modal-content::-webkit-scrollbar-thumb {
+  background: var(--color-cream-dark);
+  border-radius: 10px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .video-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .video-grid {
+    grid-template-columns: 1fr;
+  }
+  .video-modal-content {
+    padding: var(--space-6);
+    width: 95%;
+  }
+}

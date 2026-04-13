@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="DonaPetit — Mini donas decoradas, waffles y figuras de chocolate artesanales. Pedidos personalizados con amor y dedicación." />
+  <meta name="keywords"
+    content="mini donas, waffles, chocolates artesanales, donuts, DonaPetit, Ruth, bombones, pedidos personalizados" />
+  <meta property="og:title" content="DonaPetit — Dulce arte hecho con amor" />
+  <meta property="og:description"
+    content="Mini donas, waffles y chocolates artesanales. Cada pieza, una obra de arte." />
+  <meta property="og:image" content="LogoIcono/imaglog.jpg" />
+  <title>DonaPetit</title>
+
+  <!-- Favicon de la pestaña del navegador -->
+  <link rel="icon" type="image/png" href="LogoIcono/Icono.png" />
+  <link rel="apple-touch-icon" href="LogoIcono/Icono.png" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&family=Dancing+Script:wght@600;700&display=swap"
+    rel="stylesheet" />
+
+  <!-- CSS Principal -->
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/sections.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/videos.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+
+  <!-- GSAP CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+
+  <!-- Lenis Smooth Scroll CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js" defer></script>
+</head>
+
+<body>
+
+  <!-- =============================================
+       NAVEGACIÓN
+  ============================================== -->
+  <nav class="navbar" id="navbar" role="navigation" aria-label="Navegación principal">
+    <div class="nav-container">
+      <!-- Logo -->
+      <a href="#hero" class="nav-logo" id="navLogo" aria-label="DonaPetit - Inicio">
+        <img src="LogoIcono/dona.png" alt="DonaPetit Logo" class="nav-logo-img" />
+        <div class="nav-logo-bubble" id="logoBubble">
+          <strong>Frases Deliciosas!!!</strong>
+          <span class="nav-logo-text">Diseñando tus antojos en donas, waffles y chocolate.</span>
+        </div>
+      </a>
+
+      <!-- Menú de navegación principal -->
+      <ul class="nav-links" id="navLinks" role="list">
+        <li><a href="#historia" class="nav-link">Historia</a></li>
+        <li><a href="#productos" class="nav-link">Productos</a></li>
+        <li><a href="#galeria" class="nav-link">Galería</a></li>
+        <li><button class="nav-link" id="btnOpenVideos">Videos</button></li>
+        <li><a href="#contacto" class="nav-link nav-cta">Pedir Ahora</a></li>
+      </ul>
+
+      <!-- Botón hamburguesa para mobile -->
+      <button class="nav-hamburger" id="navHamburger" aria-label="Abrir menú" aria-expanded="false"
+        aria-controls="navLinks">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- =============================================
+       SECCIÓN 1 — HERO
+  ============================================== -->
+  <section class="hero" id="hero" aria-label="Portada DonaPetit">
+
+    <!-- Video de fondo en loop -->
+    <div class="hero-media">
+      <video class="hero-video" autoplay muted loop playsinline aria-hidden="true" poster="Presentación/dona2.jpg">
+        <source src="Videos/Video2.mp4" type="video/mp4" />
+        <source src="Videos/video1.mp4" type="video/mp4" />
+      </video>
+      <!-- Overlay cálido semitransparente -->
+      <div class="hero-overlay" aria-hidden="true"></div>
+    </div>
+
+    <!-- Contenido del Hero -->
+    <div class="hero-content">
+
+      <p class="hero-tagline js-hero-tagline">Pequeñas donas, grandes momentos</p>
+
+      <a href="#productos" class="btn btn-hero js-hero-btn" id="heroMenuBtn">
+        <span>Ver nuestro menú</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M5 12h14M12 5l7 7-7 7" />
+        </svg>
+      </a>
+    </div>
+
+    <!-- Indicador de scroll animado -->
+    <div class="hero-scroll-indicator" aria-hidden="true">
+      <div class="scroll-dot"></div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       SECCIÓN 2 — SOBRE RUTH
+  ============================================== -->
+  <section class="historia" id="historia" aria-labelledby="historiaTitle">
+    <div class="container">
+      <div class="historia-grid">
+
+        <!-- Imágenes de la historia (Composición) -->
+        <div class="historia-media js-reveal-left" id="historiaAnimationContainer">
+          <div class="historia-img-frame">
+            <img src="Presentación/dona2.jpg" alt="Ruth, fundadora de DonaPetit" class="historia-img"
+              id="historiaImgMain" loading="lazy" />
+
+            <!-- Segunda imagen superpuesta -->
+            <div class="historia-img-secondary" id="historiaImgSecondary">
+              <img src="Presentación/waffle1.jpg" alt="Waffles artesanales DonaPetit" loading="lazy" />
+            </div>
+
+            <div class="historia-img-badge">
+              <span>✨</span>
+              <span>Imagenes Ilustrativas</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Texto narrativo -->
+        <div class="historia-content js-reveal-right">
+          <span class="section-label">Nuestra historia</span>
+          <h2 id="historiaTitle" class="historia-title">
+            Hola, <em>soy Ruth</em>
+          </h2>
+          <p class="historia-text">
+            Todo comenzó hace <strong>más de 2 años</strong>, con una receta, muchas ganas y el sueño de crear algo
+            especial. DonaPetit nació de mi pasión por los dulces artesanales y el deseo de compartir momentos únicos a
+            través de cada pieza.
+          </p>
+          <p class="historia-text">
+            Cada mini dona está decorada a mano, cada figura de chocolate lleva horas de dedicación, y cada waffle se
+            prepara con los mejores ingredientes. Acá no hay fórmulas industriales — hay <em>amor artesanal en cada
+              detalle</em>.
+          </p>
+
+          <!-- Estadísticas animadas con IntersectionObserver -->
+          <div class="historia-stats" id="statsContainer">
+            <div class="stat-item">
+              <span class="stat-number" data-target="2" data-suffix="+ años">0</span>
+              <span class="stat-label">🍩 Creando dulces</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number" data-target="500" data-suffix="+">0</span>
+              <span class="stat-label">❤️ Pedidos felices</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number" data-target="100" data-suffix="%">0</span>
+              <span class="stat-label">🎨 Hecho a mano</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       SECCIÓN 3 — PRODUCTOS
+  ============================================== -->
+  <section class="productos" id="productos" aria-labelledby="productosTitle">
+    <div class="container">
+      <div class="section-header js-reveal-up">
+        <span class="section-label">Lo que creamos</span>
+        <h2 id="productosTitle" class="section-title">Nuestros Productos</h2>
+        <p class="section-subtitle">Seleccioná una categoría y descubrí nuestras creaciones</p>
+      </div>
+
+      <!-- Tabs de categoría -->
+      <div class="productos-tabs js-reveal-up" role="tablist" aria-label="Categorías de productos">
+        <button class="tab-btn active" id="tab-donas" role="tab" aria-selected="true" aria-controls="panel-donas"
+          data-category="donas">
+          🍩 Mini Donas
+        </button>
+        <button class="tab-btn" id="tab-waffles" role="tab" aria-selected="false" aria-controls="panel-waffles"
+          data-category="waffles">
+          🧇 Waffles
+        </button>
+        <button class="tab-btn" id="tab-chocolates" role="tab" aria-selected="false" aria-controls="panel-chocolates"
+          data-category="chocolates">
+          🍫 Chocolates
+        </button>
+      </div>
+
+      <!-- Panel: Mini Donas -->
+      <div class="productos-grid active" id="panel-donas" role="tabpanel" aria-labelledby="tab-donas">
+        <!-- Tarjetas generadas por JS desde data/products.js -->
+      </div>
+
+      <!-- Panel: Waffles -->
+      <div class="productos-grid" id="panel-waffles" role="tabpanel" aria-labelledby="tab-waffles" hidden>
+      </div>
+
+      <!-- Panel: Chocolates -->
+      <div class="productos-grid" id="panel-chocolates" role="tabpanel" aria-labelledby="tab-chocolates" hidden>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       SECCIÓN 4 — GALERÍA
+  ============================================== -->
+  <section class="galeria" id="galeria" aria-labelledby="galeriaTitle">
+    <div class="container">
+      <div class="section-header js-reveal-up">
+        <span class="section-label">Galería</span>
+        <h2 id="galeriaTitle" class="section-title galeria-title-script">
+          Cada detalle, <em>una obra de arte</em>
+        </h2>
+      </div>
+
+      <!-- Filtros de galería -->
+      <div class="galeria-filters js-reveal-up" role="group" aria-label="Filtrar galería">
+        <button class="filter-btn active" data-filter="all" id="filterAll">Todos</button>
+        <button class="filter-btn" data-filter="donas" id="filterDonas">🍩 Donas</button>
+        <button class="filter-btn" data-filter="waffles" id="filterWaffles">🧇 Waffles</button>
+        <button class="filter-btn" data-filter="chocolates" id="filterChocolates">🍫 Chocolates</button>
+      </div>
+
+      <!-- Grid de galería (masonry via CSS) -->
+      <div class="galeria-grid" id="galeriaGrid" role="list">
+        <!-- Items generados por JS desde data/gallery.js -->
+      </div>
+    </div>
+
+    <!-- Lightbox fullscreen -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Vista de imagen ampliada" hidden>
+      <button class="lightbox-close" id="lightboxClose" aria-label="Cerrar imagen">✕</button>
+      <button class="lightbox-prev" id="lightboxPrev" aria-label="Imagen anterior">‹</button>
+      <button class="lightbox-next" id="lightboxNext" aria-label="Imagen siguiente">›</button>
+      <div class="lightbox-content">
+        <img src="" alt="" id="lightboxImg" class="lightbox-img" />
+        <p class="lightbox-caption" id="lightboxCaption"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       SECCIÓN 5 — PROCESO / BEHIND THE SCENES
+  ============================================== -->
+  <section class="proceso" id="proceso" aria-labelledby="procesoTitle">
+    <div class="proceso-media">
+      <video class="proceso-video" autoplay muted loop playsinline aria-hidden="true">
+        <source src="Videos/video1.mp4" type="video/mp4" />
+      </video>
+      <div class="proceso-overlay" aria-hidden="true"></div>
+    </div>
+
+    <div class="proceso-content">
+      <span class="section-label light js-proceso-label">Detrás de escena</span>
+      <h2 id="procesoTitle" class="proceso-title js-proceso-title">
+        Hecho con dedicación,<br />
+        <em>desde el primer ingrediente</em>
+      </h2>
+      <p class="proceso-text js-proceso-text">
+        Cada producto pasa por un proceso artesanal cuidado al detalle. Seleccionamos los mejores ingredientes,
+        aplicamos técnicas de decoración únicas y ponemos toda nuestra pasión en cada pieza antes de que llegue a tus
+        manos.
+      </p>
+    </div>
+  </section>
+
+  <!-- =============================================
+       SECCIÓN 7 — PEDIDOS / CONTACTO
+  ============================================== -->
+  <section class="contacto" id="contacto" aria-labelledby="contactoTitle">
+    <div class="container">
+      <div class="contacto-grid">
+
+        <!-- Info de contacto -->
+        <div class="contacto-info js-reveal-left">
+          <span class="section-label">¡Hagamos algo especial!</span>
+          <h2 id="contactoTitle" class="section-title">¿Querés hacer un<br /><em>pedido especial?</em></h2>
+          <p class="contacto-text">
+            Escribime y lo creamos juntos. Personalizamos cada producto para que tu momento sea único e irrepetible.
+          </p>
+
+          <!-- Horarios -->
+          <div class="contacto-horarios">
+            <h3 class="horarios-title">📱Atención al Público</h3>
+            <p>Pedidos por mensaje</p>
+            <p>🚚 Zona de entrega: Loma Negra 1677</p>
+          </div>
+        </div>
+
+        <!-- Formulario de contacto -->
+        <div class="contacto-form-wrap js-reveal-right">
+          <form class="contacto-form" id="contactoForm" novalidate aria-label="Formulario de pedido">
+            <h3 class="form-title">Contanos tu idea</h3>
+
+            <div class="form-group">
+              <label for="formNombre" class="form-label">Tu nombre</label>
+              <input type="text" id="formNombre" name="nombre" class="form-input" placeholder="¿Cómo te llamás?"
+                required autocomplete="name" />
+            </div>
+
+            <div class="form-group">
+              <label for="formWhatsapp" class="form-label">WhatsApp</label>
+              <input type="tel" id="formWhatsapp" name="whatsapp" class="form-input" placeholder="+54 9 11 1234-5678"
+                required autocomplete="tel" />
+            </div>
+
+            <div class="form-group">
+              <label for="formProducto" class="form-label">Producto de interés</label>
+              <select id="formProducto" name="producto" class="form-input form-select">
+                <option value="">Seleccioná un producto</option>
+                <option value="Mini Donas decoradas">🍩 Mini Donas decoradas</option>
+                <option value="Waffles">🧇 Waffles</option>
+                <option value="Figuras de chocolate">🍫 Figuras de chocolate</option>
+                <option value="Pedido personalizado">✨ Pedido personalizado</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="formMensaje" class="form-label">Tu mensaje</label>
+              <textarea id="formMensaje" name="mensaje" class="form-input form-textarea"
+                placeholder="Contame qué tenés en mente..." rows="4"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-form" id="formSubmitBtn">
+              <span>Enviar por WhatsApp</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"
+                aria-hidden="true">
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+              </svg>
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       SECCIÓN 8 — FOOTER
+  ============================================== -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-top">
+      <div class="container">
+        <div class="footer-grid">
+
+          <!-- Brand DonaPetit -->
+          <div class="footer-brand">
+            <img src="LogoIcono/LogoFooter.png" alt="DonaPetit Logo" class="footer-logo" loading="lazy" />
+            <p class="footer-slogan">Dulce arte hecho con amor, <br />desde el primer ingrediente.</p>
+          </div>
+
+          <!-- Navegación rápida -->
+          <nav class="footer-nav" aria-label="Navegación del footer">
+            <h4 class="footer-nav-title">Explorar</h4>
+            <ul class="footer-links" role="list">
+              <li><a href="#historia" class="footer-link">Nuestra historia</a></li>
+              <li><a href="#productos" class="footer-link">Productos</a></li>
+              <li><a href="#galeria" class="footer-link">Galería</a></li>
+              <li><a href="#contacto" class="footer-link">Contacto</a></li>
+            </ul>
+          </nav>
+
+          <!-- Redes sociales -->
+          <div class="footer-social">
+            <h4 class="footer-nav-title">Seguinos</h4>
+            <div class="social-icons" role="list">
+              <a href="https://wa.me/5492284714673" class="social-icon social-whatsapp" target="_blank"
+                rel="noopener noreferrer" aria-label="WhatsApp de DonaPetit" role="listitem">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path
+                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                </svg>
+              </a>
+              <a href="https://instagram.com/dona.petit.r" class="social-icon social-instagram" target="_blank"
+                rel="noopener noreferrer" aria-label="Instagram de DonaPetit" role="listitem">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path
+                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Barra inferior del footer -->
+    <div class="footer-bottom">
+      <div class="container">
+        <p class="footer-copy">
+          © 2026 DonaPetit — Todos los derechos reservados.<br />
+          Hecho con <span aria-label="amor">❤️</span> por Ruth Belén Bajuk.
+        </p>
+        <p class="footer-email">
+          <a href="mailto:minidonapetit@outlook.com">📬 minidonapetit@outlook.com</a>
+        </p>
+
+        <!-- Crédito del desarrollador -->
+        <div class="footer-dev">
+          <img src="LogoIcono/milogo.png" alt="Alejandro Bajuk" class="footer-dev-logo" loading="lazy" />
+          <span class="footer-dev-text">Desarrollado por <strong>Alejandro Bajuk</strong></span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =============================================
+       MODAL DE VIDEOS
+  ============================================== -->
+  <div class="video-modal" id="videoModal" aria-hidden="true">
+    <div class="video-modal-overlay" id="videoOverlay"></div>
+    <div class="video-modal-content">
+      <button class="video-modal-close" id="btnCloseVideos" aria-label="Cerrar videos">&times;</button>
+
+      <header class="video-modal-header">
+        <h2 class="video-modal-title">Momentos DonaPetit</h2>
+        <p class="video-modal-subtitle">Videos de los productos</p>
+      </header>
+
+      <div class="video-grid">
+        <!-- Video 1 -->
+        <div class="video-card">
+          <div class="video-wrapper">
+            <video controls preload="metadata" poster="Presentación/dona2.jpg">
+              <source src="Videos/Video2.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <span class="video-caption">Mini Donas Petit</span>
+        </div>
+        <!-- Video 2 -->
+        <div class="video-card">
+          <div class="video-wrapper">
+            <video controls preload="metadata" poster="Presentación/waffle1.jpg">
+              <source src="Videos/video1.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <span class="video-caption">Waffles Artesanales</span>
+        </div>
+        <!-- Video 3 -->
+        <div class="video-card">
+          <div class="video-wrapper">
+            <video controls preload="metadata" poster="Presentación/ilustracion.png">
+              <source src="Videos/video3.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <span class="video-caption">Arte en Chocolate</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =============================================
+       SCRIPTS — Cargados al final para performance
+  ============================================== -->
+  <!-- Datos de productos y galería -->
+  <script src="js/data/products.js"></script>
+  <script src="js/data/gallery.js"></script>
+
+  <!-- Módulos de funcionalidad -->
+  <script src="js/modules/navbar.js"></script>
+  <script src="js/modules/history.js"></script>
+  <script src="js/modules/videos.js"></script>
+  <script src="js/modules/lightbox.js"></script>
+  <script src="js/modules/stats.js"></script>
+  <script src="js/modules/gallery.js"></script>
+  <script src="js/modules/productos.js"></script>
+  <script src="js/modules/form.js"></script>
+
+  <!-- Script principal de animaciones (GSAP + Lenis) -->
+  <script src="js/main.js"></script>
+
+</body>
+
+</html>

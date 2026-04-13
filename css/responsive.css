@@ -1,0 +1,267 @@
+/* ==============================================
+   RESPONSIVE CSS — Media queries mobile-first
+   Breakpoints:
+     sm:  480px
+     md:  768px
+     lg:  1024px
+     xl:  1280px
+   ============================================== */
+
+/* ==============================================
+   TABLET — 768px hacia abajo
+   ============================================== */
+@media (max-width: 1024px) {
+
+  /* Historia: columna única */
+  .historia-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-10);
+  }
+  .historia-img {
+    height: 400px;
+  }
+  .historia-img-frame::before {
+    display: none; /* Simplificar en tablet */
+  }
+
+  /* Contacto: columna única */
+  .contacto-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-10);
+  }
+
+  /* Footer: 2 columnas */
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-10);
+  }
+  .footer-brand {
+    grid-column: 1 / -1; /* Ocupa todo el ancho */
+  }
+
+  /* Galería: 3 columnas */
+  .galeria-grid {
+    columns: 3 160px;
+  }
+
+  /* Carousel: cards más pequeñas */
+  .testimonio-card {
+    min-width: 340px;
+  }
+}
+
+/* ==============================================
+   MOBILE — 768px hacia abajo
+   ============================================== */
+@media (max-width: 768px) {
+
+  /* --- NAVBAR MOBILE --- */
+  .nav-links {
+    position: fixed;
+    top: var(--navbar-height);
+    left: 0;
+    right: 0;
+    background: rgba(253,246,238,0.98);
+    backdrop-filter: blur(16px);
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-6);
+    padding: var(--space-8) var(--space-6);
+    box-shadow: var(--shadow-xl);
+    /* Oculto por defecto */
+    transform: translateY(-110%);
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 0.3s ease;
+    z-index: calc(var(--z-nav) - 1);
+  }
+  .nav-links.open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .nav-link {
+    color: var(--color-text) !important;
+    font-size: var(--font-size-md);
+  }
+  .nav-cta {
+    color: var(--color-white) !important;
+  }
+
+  .nav-hamburger {
+    display: flex;
+  }
+
+  /* --- HERO MOBILE --- */
+  .hero-logo-img {
+    height: clamp(90px, 35vw, 150px);
+  }
+  .hero-tagline {
+    font-size: var(--font-size-xl);
+  }
+  .btn-hero {
+    padding: var(--space-4) var(--space-8);
+    font-size: var(--font-size-base);
+  }
+
+  /* --- HISTORIA MOBILE --- */
+  .historia {
+    padding: var(--space-16) 0;
+  }
+  .historia-img {
+    height: 300px;
+  }
+  .historia-title {
+    font-size: var(--font-size-2xl);
+  }
+  .historia-stats {
+    gap: var(--space-6);
+  }
+  .stat-number {
+    font-size: var(--font-size-xl);
+  }
+
+  /* --- PRODUCTOS MOBILE --- */
+  .productos {
+    padding: var(--space-16) 0;
+  }
+  .productos-tabs {
+    gap: var(--space-2);
+  }
+  .tab-btn {
+    padding: var(--space-2) var(--space-5);
+    font-size: var(--font-size-sm);
+  }
+  .productos-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: var(--space-6);
+  }
+
+  /* --- GALERÍA MOBILE --- */
+  .galeria {
+    padding: var(--space-16) 0;
+  }
+  .galeria-grid {
+    columns: 2 140px;
+    column-gap: var(--space-3);
+  }
+  .galeria-filters {
+    gap: var(--space-2);
+  }
+  .filter-btn {
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--font-size-xs);
+  }
+
+  /* --- PROCESO MOBILE --- */
+  .proceso {
+    min-height: 70vh;
+  }
+  .proceso-title {
+    font-size: var(--font-size-xl);
+  }
+
+  /* --- TESTIMONIOS MOBILE --- */
+  .testimonios {
+    padding: var(--space-16) 0;
+  }
+  .testimonio-card {
+    min-width: 290px;
+    padding: var(--space-6);
+  }
+
+  /* --- CONTACTO MOBILE --- */
+  .contacto {
+    padding: var(--space-16) 0;
+  }
+  .contacto-form-wrap {
+    padding: var(--space-6);
+  }
+
+  /* --- FOOTER MOBILE --- */
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+  .footer-brand {
+    grid-column: 1;
+  }
+  .footer-logo {
+    height: 48px;
+  }
+
+  /* --- LIGHTBOX MOBILE --- */
+  .lightbox-prev {
+    left: var(--space-2);
+  }
+  .lightbox-next {
+    right: var(--space-2);
+  }
+}
+
+/* ==============================================
+   PEQUEÑO MOBILE — 480px hacia abajo
+   ============================================== */
+@media (max-width: 480px) {
+
+  /* Espaciado del container */
+  .container {
+    padding-inline: var(--space-4);
+  }
+
+  /* Galería en 1 sola columna para pantallas tiny */
+  .galeria-grid {
+    columns: 2 120px;
+  }
+
+  /* Estadísticas en 2 columnas */
+  .historia-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+  }
+
+  /* Cards de testimonio ancho completo */
+  .testimonio-card {
+    min-width: calc(100vw - var(--space-8));
+  }
+
+  /* Hero tagline muy pequeño */
+  .hero-tagline {
+    font-size: var(--font-size-lg);
+  }
+
+  /* Formulario: padding mínimo */
+  .contacto-form-wrap {
+    padding: var(--space-5);
+  }
+
+  /* Footer grid simplificado */
+  .footer-grid {
+    gap: var(--space-6);
+  }
+}
+
+/* ==============================================
+   PANTALLAS GRANDES — 1280px+
+   ============================================== */
+@media (min-width: 1280px) {
+
+  /* Galería: más columnas */
+  .galeria-grid {
+    columns: 4 200px;
+  }
+
+  /* Historia: imagen más alta */
+  .historia-img {
+    height: 620px;
+  }
+
+  /* Section titles: máximo tamaño */
+  .section-title {
+    font-size: var(--font-size-3xl);
+  }
+}

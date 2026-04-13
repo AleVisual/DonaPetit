@@ -1,0 +1,292 @@
+/* ==============================================
+   BASE CSS — Reset, tipografía global y
+   utilidades fundamentales del sitio.
+   ============================================== */
+
+/* --- Reset moderno --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Previene overflow horizontal indeseado */
+html {
+  overflow-x: hidden;
+  /* Scroll suave nativo como fallback (Lenis lo sobreescribe) */
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  color: var(--color-text);
+  background-color: var(--color-cream);
+  overflow-x: hidden;
+  /* Soporte para Lenis smooth scroll */
+  overscroll-behavior: none;
+}
+
+/* --- Imágenes responsivas --- */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* --- Listas sin estilo por defecto --- */
+ul {
+  list-style: none;
+}
+
+/* --- Links sin estilo por defecto --- */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* --- Botones sin estilo base --- */
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* --- Input y select base --- */
+input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* --- Selección de texto con color de marca --- */
+::selection {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+/* --- Scrollbar personalizada (webkit) --- */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-cream-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: var(--radius-full);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-dark);
+}
+
+/* --- Foco accesible visible --- */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* ==============================================
+   CONTENEDOR PRINCIPAL
+   ============================================== */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: var(--space-6);
+}
+
+/* ==============================================
+   TIPOGRAFÍA GLOBAL
+   ============================================== */
+
+/* Título de display (Playfair con italic) */
+.display-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--color-chocolate);
+}
+
+/* Título de sección estándar */
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(var(--font-size-xl), 4vw, var(--font-size-3xl));
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-chocolate);
+}
+
+/* Etiqueta pequeña decorativa sobre el título */
+.section-label {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: var(--space-3);
+  position: relative;
+  padding-left: var(--space-5);
+}
+
+/* Línea decorativa antes del label */
+.section-label::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 14px;
+  height: 2px;
+  background: var(--color-primary);
+  border-radius: var(--radius-full);
+}
+
+/* Variante clara para secciones oscuras */
+.section-label.light {
+  color: var(--color-cream);
+}
+.section-label.light::before {
+  background: var(--color-cream);
+}
+
+/* Subtítulo de sección */
+.section-subtitle {
+  font-size: var(--font-size-md);
+  color: var(--color-text-muted);
+  margin-top: var(--space-3);
+}
+
+/* Header de sección centrado */
+.section-header {
+  text-align: center;
+  margin-bottom: var(--space-12);
+}
+
+/* Italic de Playfair para los títulos */
+.section-title em,
+.historia-title em,
+.proceso-title em {
+  font-style: italic;
+  color: var(--color-primary);
+}
+
+/* ==============================================
+   BOTONES GLOBALES
+   ============================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-8);
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-size: var(--font-size-base);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition:
+    transform var(--transition-base),
+    box-shadow var(--transition-base),
+    background-color var(--transition-base),
+    color var(--transition-base);
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  border: 2px solid transparent;
+}
+
+/* Efecto ripple genérico */
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.15);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+.btn:hover::after {
+  opacity: 1;
+}
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+.btn:active {
+  transform: translateY(0);
+}
+
+/* Hero CTA */
+.btn-hero {
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 2px solid rgba(255,255,255,0.6);
+  color: var(--color-white);
+  font-size: var(--font-size-md);
+  padding: var(--space-5) var(--space-10);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+}
+.btn-hero:hover {
+  background: rgba(255,255,255,0.25);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+}
+
+/* WhatsApp */
+.btn-whatsapp {
+  background: #25D366;
+  color: var(--color-white);
+  box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+}
+.btn-whatsapp:hover {
+  background: #20b858;
+  box-shadow: 0 8px 32px rgba(37,211,102,0.55);
+}
+
+/* Instagram */
+.btn-instagram {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  color: var(--color-white);
+  box-shadow: 0 4px 20px rgba(194,24,91,0.35);
+}
+.btn-instagram:hover {
+  box-shadow: 0 8px 32px rgba(194,24,91,0.5);
+}
+
+/* Formulario */
+.btn-form {
+  width: 100%;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  color: var(--color-white);
+  box-shadow: 0 4px 20px rgba(194,24,91,0.3);
+  margin-top: var(--space-4);
+}
+.btn-form:hover {
+  box-shadow: 0 8px 32px rgba(194,24,91,0.5);
+}
+
+/* Tarjeta de producto */
+.btn-producto {
+  background: var(--color-primary);
+  color: var(--color-white);
+  font-size: var(--font-size-sm);
+  padding: var(--space-3) var(--space-6);
+  box-shadow: 0 3px 12px rgba(194,24,91,0.3);
+}
+.btn-producto:hover {
+  background: var(--color-primary-dark);
+}
+
+/* Pulse animation para WhatsApp flotante */
+.btn-pulse {
+  animation: btnPulse 2.5s cubic-bezier(0.4,0,0.6,1) infinite;
+}
+@keyframes btnPulse {
+  0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.4); }
+  50%       { box-shadow: 0 4px 36px rgba(37,211,102,0.7), 0 0 0 8px rgba(37,211,102,0.1); }
+}

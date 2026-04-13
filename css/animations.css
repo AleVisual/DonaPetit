@@ -1,0 +1,195 @@
+/* ==============================================
+   ANIMATIONS CSS — Clases de animación y
+   estados iniciales para JS/GSAP/IntersectionObserver.
+   ============================================== */
+
+/* ==============================================
+   CLASE BASE: js-reveal-*
+   Los elementos empiezan invisibles y se animan
+   al entrar al viewport via IntersectionObserver
+   o GSAP ScrollTrigger.
+   ============================================== */
+
+.js-reveal-up,
+.js-reveal-left,
+.js-reveal-right {
+  opacity: 0;
+  will-change: opacity, transform;
+}
+
+.js-reveal-up {
+  transform: translateY(40px);
+}
+.js-reveal-left {
+  transform: translateX(-50px);
+}
+.js-reveal-right {
+  transform: translateX(50px);
+}
+
+/* Estado visible — aplicado por JS tras entrar en viewport */
+.is-visible {
+  opacity: 1 !important;
+  transform: translate(0) !important;
+  transition:
+    opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Delays escalonados para grids (aplicados inline o con nth-child) */
+.is-visible:nth-child(2) { transition-delay: 0.1s; }
+.is-visible:nth-child(3) { transition-delay: 0.2s; }
+.is-visible:nth-child(4) { transition-delay: 0.3s; }
+.is-visible:nth-child(5) { transition-delay: 0.4s; }
+.is-visible:nth-child(6) { transition-delay: 0.5s; }
+
+/* ==============================================
+   ANIMACIONES CSS PURAS
+   ============================================== */
+
+/* Entrada de fade simple */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Fade + escala para el hero logo */
+@keyframes heroLogoIn {
+  from {
+    opacity: 0;
+    transform: scale(0.85) translateY(20px);
+    filter: drop-shadow(0 0 0 transparent);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: drop-shadow(0 8px 24px rgba(0,0,0,0.4));
+  }
+}
+
+/* Slide desde abajo */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Float suave para elementos decorativos */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+
+/* Rotación lenta de fondo decorativo */
+@keyframes slowRotate {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Shimmer para skeleton loaders */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Estrella que parpadea */
+@keyframes starTwinkle {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%       { transform: scale(1.3); opacity: 0.8; }
+}
+
+/* Stars animadas en testimonios */
+.testimonio-stars span {
+  display: inline-block;
+  animation: starTwinkle 1.5s ease-in-out infinite;
+}
+.testimonio-stars span:nth-child(1) { animation-delay: 0.0s; }
+.testimonio-stars span:nth-child(2) { animation-delay: 0.1s; }
+.testimonio-stars span:nth-child(3) { animation-delay: 0.2s; }
+.testimonio-stars span:nth-child(4) { animation-delay: 0.3s; }
+.testimonio-stars span:nth-child(5) { animation-delay: 0.4s; }
+
+/* ==============================================
+   ESTADOS DE HOVER GLOBAL MEJORADOS
+   ============================================== */
+
+/* Efecto hover suave en imágenes galería */
+.galeria-item {
+  transform-origin: center;
+  transition:
+    transform var(--transition-base),
+    opacity var(--transition-base);
+}
+
+/* Filtrado de galería: items que NO coinciden */
+.galeria-item.filtered-out {
+  opacity: 0.2;
+  transform: scale(0.96);
+  pointer-events: none;
+}
+
+/* ==============================================
+   LOADING STATE — Spinner de carga 
+   ============================================== */
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--color-cream-dark);
+  border-top-color: var(--color-primary);
+  border-radius: var(--radius-full);
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ==============================================
+   TOAST / MENSAJE DE CONFIRMACIÓN
+   ============================================== */
+.toast {
+  position: fixed;
+  bottom: var(--space-8);
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: var(--color-chocolate);
+  color: var(--color-white);
+  padding: var(--space-4) var(--space-8);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  box-shadow: var(--shadow-xl);
+  z-index: var(--z-toast);
+  opacity: 0;
+  transition:
+    opacity 0.3s ease,
+    transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+  white-space: nowrap;
+}
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ==============================================
+   PÁGINA: Reduce motion para accesibilidad
+   ============================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .js-reveal-up,
+  .js-reveal-left,
+  .js-reveal-right {
+    opacity: 1;
+    transform: none;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}

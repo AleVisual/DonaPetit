@@ -1,0 +1,570 @@
+/* ==============================================
+   SECTIONS CSS — Estilos específicos de cada
+   sección del sitio: Hero, Historia, Productos,
+   Galería, Proceso, Testimonios, Contacto, Footer
+   ============================================== */
+
+/* ==============================================
+   SECCIÓN 1 — HERO
+   ============================================== */
+.hero {
+  position: relative;
+  height: 100svh;
+  /* usa svh para mobile correctamente */
+  min-height: 580px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Contenedor del video de fondo */
+.hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Overlay cálido semitransparente */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg,
+      rgba(78, 43, 30, 0.70) 0%,
+      rgba(136, 14, 79, 0.55) 50%,
+      rgba(78, 43, 30, 0.65) 100%);
+}
+
+/* Contenido del Hero — sobre el video */
+.hero-content {
+  position: relative;
+  z-index: var(--z-above);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+  padding: var(--space-4);
+  max-width: 760px;
+}
+
+/* Tagline */
+.hero-tagline {
+  font-family: var(--font-script);
+  font-size: clamp(var(--font-size-xl), 4vw, var(--font-size-3xl));
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  /* Animado por GSAP */
+  letter-spacing: 0.02em;
+}
+
+/* CTA Hero */
+.js-hero-btn {
+  opacity: 0;
+  /* Animado por GSAP */
+}
+
+/* ==============================================
+   SECCIÓN 2 — HISTORIA
+   ============================================== */
+.historia {
+  padding: var(--space-32) 0;
+  background: var(--color-cream);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decoración de fondo sutil */
+.historia::before {
+  content: '🍩';
+  position: absolute;
+  font-size: 18rem;
+  opacity: 0.04;
+  top: -2rem;
+  right: -3rem;
+  pointer-events: none;
+  line-height: 1;
+}
+
+/* Grid asimétrico: imagen izq — texto der */
+.historia-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-16);
+  align-items: center;
+}
+
+/* Marco de la imagen */
+.historia-img-frame {
+  position: relative;
+}
+
+.historia-img-frame::before {
+  /* Borde decorativo desfasado */
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: calc(var(--radius-2xl) + 8px);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+  z-index: -1;
+}
+
+.historia-img {
+  width: 100%;
+  height: clamp(400px, 60vh, 560px);
+  object-fit: cover;
+  border-radius: var(--radius-2xl);
+  display: block;
+  box-shadow: var(--shadow-lg);
+}
+
+/* Imagen secundaria superpuesta */
+.historia-img-secondary {
+  position: absolute;
+  bottom: -40px;
+  right: -30px;
+  width: 220px;
+  height: 220px;
+  border: 8px solid var(--color-white);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+  overflow: hidden;
+  z-index: 2;
+  transition: transform var(--transition-base);
+}
+
+.historia-img-secondary:hover {
+  transform: translateY(-10px) rotate(-3deg);
+}
+
+.historia-img-secondary img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Badge sobre la imagen */
+.historia-img-badge {
+  position: absolute;
+  top: var(--space-5);
+  left: var(--space-5);
+  background: rgba(253, 246, 238, 0.95);
+  backdrop-filter: blur(8px);
+  border-radius: var(--radius-full);
+  padding: var(--space-2) var(--space-5);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  z-index: 3;
+  font-weight: 700;
+  font-size: var(--font-size-sm);
+  color: var(--color-chocolate);
+  box-shadow: var(--shadow-md);
+}
+
+@media (max-width: 768px) {
+  .historia-media {
+    margin-bottom: 40px;
+  }
+
+  .historia-img-secondary {
+    width: 160px;
+    height: 160px;
+    bottom: -20px;
+    right: -10px;
+  }
+}
+
+/* Texto narrativo */
+.historia-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.historia-title {
+  font-family: var(--font-display);
+  font-size: clamp(var(--font-size-2xl), 4vw, var(--font-size-4xl));
+  font-weight: 700;
+  color: var(--color-chocolate);
+  line-height: 1.15;
+  margin-top: var(--space-3);
+}
+
+.historia-text {
+  font-size: var(--font-size-md);
+  color: var(--color-text-muted);
+  line-height: 1.8;
+}
+
+.historia-text strong {
+  color: var(--color-chocolate);
+  font-weight: 700;
+}
+
+.historia-text em {
+  color: var(--color-primary);
+  font-style: italic;
+  font-family: var(--font-display);
+}
+
+/* ==============================================
+   SECCIÓN 3 — PRODUCTOS
+   ============================================== */
+.productos {
+  padding: var(--space-32) 0;
+  background: var(--color-cream-dark);
+  position: relative;
+}
+
+/* Decoración de fondo */
+.productos::after {
+  content: '🧇';
+  position: absolute;
+  font-size: 16rem;
+  opacity: 0.08;
+  bottom: 2rem;
+  left: -2rem;
+  pointer-events: none;
+}
+
+/* ==============================================
+   SECCIÓN 4 — GALERÍA
+   ============================================== */
+.galeria {
+  padding: var(--space-32) 0;
+  background: var(--color-cream);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decoración de fondo */
+.galeria::before {
+  content: '🍫';
+  position: absolute;
+  font-size: 18rem;
+  opacity: 0.04;
+  top: -4rem;
+  right: -4rem;
+  pointer-events: none;
+  transform: rotate(-15deg);
+}
+
+/* Título con script font */
+.galeria-title-script em {
+  font-family: var(--font-script);
+  font-style: normal;
+  font-size: 1.15em;
+  color: var(--color-primary);
+}
+
+/* ==============================================
+   SECCIÓN 5 — PROCESO / BEHIND THE SCENES
+   ============================================== */
+.proceso {
+  position: relative;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.proceso-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.proceso-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.5) saturate(0.8);
+}
+
+/* Overlay cinematográfico */
+.proceso-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top,
+      rgba(20, 5, 0, 0.80) 0%,
+      rgba(78, 43, 30, 0.50) 50%,
+      rgba(20, 5, 0, 0.70) 100%);
+}
+
+.proceso-content {
+  position: relative;
+  z-index: var(--z-above);
+  text-align: center;
+  max-width: 820px;
+  padding: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.proceso-title {
+  font-family: var(--font-display);
+  font-size: clamp(var(--font-size-2xl), 5vw, var(--font-size-4xl));
+  font-weight: 700;
+  color: var(--color-white);
+  line-height: 1.2;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  /* Animado por GSAP ScrollTrigger */
+}
+
+.proceso-title em {
+  color: var(--color-accent-light);
+  font-style: italic;
+}
+
+.proceso-text {
+  font-size: var(--font-size-md);
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.8;
+  max-width: 600px;
+  opacity: 0;
+  /* Animado por GSAP ScrollTrigger */
+}
+
+/* ==============================================
+   SECCIÓN 6 — TESTIMONIOS
+   ============================================== */
+.testimonios {
+  padding: var(--space-32) 0;
+  background: var(--color-cream-dark);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Patrón de puntos decorativo */
+.testimonios::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(var(--color-primary) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.04;
+  pointer-events: none;
+}
+
+/* Override del container para que el track
+   desborde sin causar scrollbar horizontal */
+.testimonios .container {
+  overflow: visible;
+}
+
+.testimonios .carousel-wrapper {
+  margin-inline: calc(-1 * var(--space-6));
+  padding-inline: var(--space-6);
+}
+
+/* ==============================================
+   SECCIÓN 7 — CONTACTO
+   ============================================== */
+.contacto {
+  padding: var(--space-32) 0;
+  background: var(--color-cream);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decoración de fondo */
+.contacto::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  right: -200px;
+  width: 600px;
+  height: 600px;
+  border-radius: var(--radius-full);
+  background: radial-gradient(circle, rgba(194, 24, 91, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Grid: info izq — formulario der */
+.contacto-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-16);
+  align-items: start;
+}
+
+.contacto-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.contacto-text {
+  font-size: var(--font-size-md);
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+
+/* Horarios */
+.contacto-horarios {
+  background: var(--color-cream-dark);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  border-left: 4px solid var(--color-primary);
+}
+
+.horarios-title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-base);
+  font-weight: 700;
+  color: var(--color-chocolate);
+  margin-bottom: var(--space-3);
+}
+
+.contacto-horarios p {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+/* Tarjeta del formulario */
+.contacto-form-wrap {
+  background: var(--color-white);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-8);
+  box-shadow: var(--shadow-xl);
+  border: 1px solid var(--color-cream-dark);
+  transform: translateY(-60px); /* Lo levantamos más para un efecto más pro y visibilidad total */
+}
+
+.contacto-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.form-title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--color-chocolate);
+  margin-bottom: var(--space-2);
+}
+
+/* ==============================================
+   SECCIÓN 8 — FOOTER
+   ============================================== */
+.footer {
+  background: var(--color-chocolate);
+  color: var(--color-text-light);
+}
+
+.footer-top {
+  padding: var(--space-16) 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Grid del footer: equilibrado para que el brand esté más a la izquierda */
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: var(--space-8);
+  align-items: start;
+}
+
+/* Brand */
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  /* Alineado al costado */
+  gap: var(--space-2);
+}
+
+.footer-logo {
+  height: clamp(80px, 10vw, 120px);
+  width: auto;
+  object-fit: contain;
+}
+
+.footer-slogan {
+  font-size: var(--font-size-sm);
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.5;
+  margin-top: var(--space-2);
+}
+
+/* Nav del footer */
+.footer-nav-title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-base);
+  font-weight: 700;
+  color: var(--color-white);
+  margin-bottom: var(--space-5);
+  letter-spacing: 0.05em;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.footer-link {
+  font-size: var(--font-size-sm);
+  color: rgba(255, 255, 255, 0.65);
+  transition: color var(--transition-base), padding-left var(--transition-base);
+  position: relative;
+}
+
+.footer-link:hover {
+  color: var(--color-primary-light);
+  padding-left: var(--space-2);
+}
+
+/* Footer social */
+.footer-social {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Barra inferior */
+.footer-bottom {
+  padding: var(--space-6) 0;
+}
+
+.footer-copy {
+  font-size: var(--font-size-sm);
+  color: rgba(255, 255, 255, 0.45);
+  text-align: center;
+  line-height: 1.6;
+}
+
+.footer-email {
+  text-align: center;
+  margin-top: var(--space-2);
+  margin-bottom: var(--space-6);
+}
+
+.footer-email a {
+  color: var(--color-white); /* Blanco para contraste total */
+  font-weight: 500;
+  text-decoration: none;
+  font-size: var(--font-size-sm);
+  transition: color var(--transition-base), opacity var(--transition-base);
+  opacity: 0.85;
+}
+
+.footer-email a:hover {
+  text-decoration: underline;
+  opacity: 1;
+  color: var(--color-primary-light); /* Un toque de color al pasar el mouse */
+}
