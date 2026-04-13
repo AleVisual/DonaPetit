@@ -55,6 +55,11 @@
    ============================================== */
 @media (max-width: 768px) {
 
+  /* Scroll suave nativo en mobile (Lenis no corre aquí) */
+  html {
+    scroll-behavior: smooth;
+  }
+
   /* --- NAVBAR MOBILE --- */
   .nav-links {
     position: fixed;
@@ -308,3 +313,4 @@
     background-position: center;
   }
 }
+
