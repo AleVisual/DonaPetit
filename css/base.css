@@ -13,9 +13,8 @@
 /* Previene overflow horizontal indeseado */
 html {
   overflow-x: hidden;
-  /* Scroll suave nativo como fallback (Lenis lo sobreescribe en desktop) */
-  scroll-behavior: smooth;
-  /* Habilita scroll táctil nativo en toda la página */
+  /* scroll-behavior: smooth se define solo en mobile (ver responsive.css)
+     En desktop lo maneja Lenis — tenerlo en ambos causa conflicto */
   touch-action: pan-y;
 }
 
@@ -294,3 +293,4 @@ input, select, textarea {
   0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.4); }
   50%       { box-shadow: 0 4px 36px rgba(37,211,102,0.7), 0 0 0 8px rgba(37,211,102,0.1); }
 }
+
