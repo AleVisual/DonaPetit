@@ -60,4 +60,5 @@ const GALLERY_ITEMS = [
   { id: 'g-choco-25', img: 'ProductoChocolates/MedallonMentita.jpg', name: 'Medallones de Menta', category: 'chocolates' },
   { id: 'g-choco-26', img: 'ProductoChocolates/VelaColor.jpg', name: 'Vela Decorada', category: 'chocolates' },
   { id: 'g-choco-27', img: 'ProductoChocolates/BarraRellena.jpg', name: 'Barra Rellena', category: 'chocolates' },
+  { id: 'g-choco-28', img: 'ProductoChocolates/BolsitaBomBonesSurtido.jpg', name: 'BomBones Surtidos', category: 'chocolates' },
 ];
