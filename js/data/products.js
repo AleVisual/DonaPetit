@@ -202,8 +202,8 @@ const PRODUCTS = {
     },
     {
       id: 'choco-13',
-      name: 'Bolsita BomBones Surtido',
-      desc: 'Figura de vela de cumpleaños en chocolate. Sorprendé con creatividad.',
+      name: 'Bolsita BomBones Surtidos',
+      desc: 'Dulce de leche, Coffler, Menta, Nutella, Bananita y mucho más.... Sorprendé con creatividad.',
       img: 'ProductoChocolates/BolsitaBomBonesSurtido.jpg',
       badge: '❤️ Favorito',
     },
