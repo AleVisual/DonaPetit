@@ -202,7 +202,7 @@ const PRODUCTS = {
     },
     {
       id: 'choco-13',
-      name: 'Bolsita BomBones Surtidos',
+      name: 'Bolsita de BomBones Surtidos',
       desc: 'Dulce de leche, Coffler, Menta, Nutella, Bananita y mucho más.',
       img: 'ProductoChocolates/BolsitaBomBonesSurtido.jpg',
       badge: '❤️ Favorito',
